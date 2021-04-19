@@ -27,7 +27,7 @@ public:
 	void mostrarTodosVertices();
 	void mostrarTodasArestas();
 
-	//bool ehConvexo();
+	bool ehConvexo();
 
 	//bool contemPonto(Point* ponto);
 

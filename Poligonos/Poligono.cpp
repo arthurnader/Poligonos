@@ -41,3 +41,68 @@ void Poligono::mostrarTodasArestas()
 		iterator.mostrarAresta();
 	}
 }
+
+
+bool Poligono::ehConvexo()
+{
+	vector<Point> vertices2 = vertices;
+	vertices2.push_back(vertices[0]);
+	vertices2.push_back(vertices[1]);
+
+	for (int i = 0; i < vertices.size(); i++) {
+		Aresta diagonalAnalisada(vertices2[i], vertices2[i + 2]);
+		double projecao = vertices2[i + 1].get_x() * diagonalAnalisada.getCoefAngular() + diagonalAnalisada.getCoefLinear();
+
+		if (diagonalAnalisada.getCoefAngular() == DBL_MAX) {
+
+			if (vertices2[i].get_y() < vertices2[i + 2].get_y()) {
+				if (vertices2[i + 1].get_x() < vertices2[i].get_x()) {
+					return false;
+				}
+			}
+			else {
+				if (vertices2[i + 1].get_x() > vertices2[i].get_x()) {
+					return false;
+				}
+			}
+		}
+		else if (diagonalAnalisada.getCoefAngular() > 0) {
+			if (vertices2[i].get_y() < vertices2[i + 2].get_y()) {
+				if (projecao < vertices2[i + 1].get_y()) {
+					return false;
+				}
+			}
+			else {
+				if (projecao > vertices2[i + 1].get_y()) {
+					return false;
+				}
+			}
+
+		}
+		else if (diagonalAnalisada.getCoefAngular() < 0) {
+			if (vertices2[i].get_y() < vertices2[i + 2].get_y()) {
+				if (projecao > vertices2[i + 1].get_y()) {
+					return false;
+				}
+			}
+			else {
+				if (projecao < vertices2[i + 1].get_y()) {
+					return false;
+				}
+			}
+		}
+		else {
+			if (vertices2[i].get_x() > vertices2[i + 2].get_x()) {
+				if (vertices2[i + 1].get_y() < vertices2[i].get_y()) {
+					return false;
+				}
+			}
+			else {
+				if (vertices2[i + 1].get_y() > vertices2[i].get_y()) {
+					return false;
+				}
+			}
+		}
+	}
+	return true;
+}
