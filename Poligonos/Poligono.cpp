@@ -5,8 +5,8 @@ Poligono::Poligono(vector<Point> pontos)
 	vertices = pontos;
 	this->numeroDeVertices = pontos.size();
 	this->gerarArestas();
+	this->calcularArea();
 }
-
 
 vector<Point> Poligono::getVertices()
 {
@@ -105,4 +105,22 @@ bool Poligono::ehConvexo()
 		}
 	}
 	return true;
+}
+
+void Poligono::calcularArea()
+{
+	double areaPoligono = 0;
+
+	for (int i = 0; i != vertices.size()-1; i++) {
+		areaPoligono += vertices[i].get_x() * vertices[i + 1].get_y() - vertices[i + 1].get_x() * vertices[i].get_y();
+	}
+	areaPoligono += vertices[vertices.size() - 1].get_x() * vertices[0].get_y() - vertices[0].get_x() * vertices[vertices.size() - 1].get_y();
+	areaPoligono /= 2;
+
+	this->area = areaPoligono;
+}
+
+double Poligono::getArea()
+{
+	return this->area;
 }

@@ -26,6 +26,7 @@ int main() {
 
 	Poligono* pol = new Poligono(pontos);
 	cout << pol->ehConvexo() << endl;
+	cout << pol->getArea() << endl;
 
 	return 0;
 }

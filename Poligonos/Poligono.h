@@ -31,8 +31,8 @@ public:
 
 	//bool contemPonto(Point* ponto);
 
-	//void calcularArea();
-
+	void calcularArea();
+	double getArea();
 };
 
 #endif // POLIGONO_H_INCLUDED
