@@ -3,11 +3,9 @@
 
 using namespace std;
 
-
 int main() {
 	int numeroPontos;
 	vector<Point> pontos;
-
 
 	cout << "Digite o numero de vertices do poligo: ";
 	cin >> numeroPontos;
@@ -27,6 +25,14 @@ int main() {
 	Poligono* pol = new Poligono(pontos);
 	cout << pol->ehConvexo() << endl;
 	cout << pol->getArea() << endl;
+
+	Point pontoAnalisado(NULL, NULL, 0);
+	cin >> x;
+	cin >> y;
+	pontoAnalisado.set_x(x);
+	pontoAnalisado.set_y(y);
+
+	cout << pol->contemPonto(pontoAnalisado);
 
 	return 0;
 }

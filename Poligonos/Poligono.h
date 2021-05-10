@@ -29,7 +29,7 @@ public:
 
 	bool ehConvexo();
 
-	//bool contemPonto(Point* ponto);
+	bool contemPonto(Point ponto);
 
 	void calcularArea();
 	double getArea();

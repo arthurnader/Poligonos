@@ -107,6 +107,70 @@ bool Poligono::ehConvexo()
 	return true;
 }
 
+bool Poligono::contemPonto(Point ponto)
+{
+	vector<Point> vertices2 = vertices;
+	vertices2.push_back(vertices[0]);
+
+	for (int i = 0; i < arestas.size(); i++) {
+		cout << i;
+		double projecao = ponto.get_x() * arestas[i].getCoefAngular() + arestas[i].getCoefLinear();
+
+		if (arestas[i].getCoefAngular() == DBL_MAX) {
+			if (vertices2[i].get_y() < vertices2[i + 1].get_y()) {
+				if (ponto.get_x() > vertices2[i].get_x()) {
+					return false;
+				}
+			}
+			else {
+				if (ponto.get_x() < vertices2[i].get_x()) {
+					return false;
+				}
+			}
+		}
+
+		else if (arestas[i].getCoefAngular() > 0) {
+			if (vertices2[i].get_y() < vertices2[i + 1].get_y()) {
+				if (projecao < ponto.get_y()) {
+					return false;
+				}
+			}
+			else {
+				if (projecao > ponto.get_y()) {
+					return false;
+				}
+			}
+		}
+
+		else if (arestas[i].getCoefAngular() < 0) {
+			if (vertices2[i].get_y() < vertices2[i + 1].get_y()) {
+				if (projecao < ponto.get_y()) {
+					return false;
+				}
+			}
+			else {
+				if (projecao > ponto.get_y()) {
+					return false;
+				}
+			}
+		}
+		
+		else {
+			if (vertices2[i].get_x() < vertices2[i + 1].get_x()) {
+				if (ponto.get_y() < vertices2[i].get_y()) {
+					return false;
+				}
+			}
+			else {
+				if (ponto.get_y() > vertices2[i].get_y()) {
+					return false;
+				}
+			}
+		}
+	}
+	return true;
+}
+
 void Poligono::calcularArea()
 {
 	double areaPoligono = 0;
